@@ -1,0 +1,4 @@
+Version 0.1
+    Date: 17-12-2024
+    1.The app will compare two folders and show the difference in .txt and .py files in both repo.
+    2.Along with app will display unique files for each repo.
