@@ -7,9 +7,6 @@ __pycache__
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
 # Temp files
 *~
 ~*
@@ -19,6 +16,7 @@ __pycache__
 *#
 
 # Distribution / packaging
+tests
 .Python
 build/
 develop-eggs/

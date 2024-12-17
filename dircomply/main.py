@@ -1,9 +1,25 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
+import sys
+from . import __version__
 
 # extension to compare
 ext_list=('.txt','.py','.bat','.html')
+
+def print_help():
+    help_message = """
+Usage: dircomply [OPTIONS]
+
+A small package to compare the files between two project folders.
+
+Options:
+  --version, -v      Show the version of dircomply and exit
+  --help, -h         Show this help message and exit
+  (No arguments)     Launch the GUI application
+    """
+    print(help_message)
+    sys.exit(0)
 # Function to read file content
 def read_file(filepath):
     try:
@@ -46,6 +62,14 @@ def compare_folders(folder1, folder2):
 
 # GUI Application
 def create_gui():
+    # Check for command-line arguments
+    if "--version" in sys.argv or "-v" in sys.argv:
+        print(f"version {__version__}")
+        sys.exit(0)
+    elif "--help" in sys.argv or "-h" in sys.argv:
+        print_help()
+        sys.exit(0)
+ 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
         if path:

@@ -2,7 +2,6 @@
 setlocal
 echo =================================
 echo Welcome to setup. This setup will create local virtual env
-echo And then it install required python libraries from req.txt file in current directory
 echo you can rerun this without any issue
 @REM ############################################################################## PYTHON VERSION VERY IMPORTANT
 set "python_version=312"
@@ -25,6 +24,10 @@ cd ..
 set "folder=%cd%"
 for %%A in ("%folder%") do set "folder=%%~nxA"
 set "name=%folder%-py%python_version%-env"
+@REM create required directories
+if not exist "%userdir%\envs" (
+    mkdir "%userdir%\envs"
+)
 if exist "%userdir%\envs\%name%" (
     echo "%userdir%\envs\%name%" folder exists
 ) else (
@@ -33,10 +36,5 @@ if exist "%userdir%\envs\%name%" (
 )
 call %userdir%\envs\%name%\Scripts\activate
 python -m pip install --upgrade pip
-@REM ##############################################################################
-@REM for python version specific
-if exist req%python_version%_win.txt (
-    python -m pip install -r req%python_version%_win.txt
-)
 @REM ##############################################################################
 deactivate
