@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 
+# extension to compare
+ext_list=('.txt','.py','.bat','.html')
 # Function to read file content
 def read_file(filepath):
     try:
@@ -10,10 +12,20 @@ def read_file(filepath):
     except Exception as e:
         return f"Error: {e}"
 
+# Function to get all files with specific extensions in a folder and its subdirectories
+def get_files_with_extensions(folder, extensions):
+    all_files = set()
+    for root_dir, _, files in os.walk(folder):
+        for file in files:
+            if file.endswith(extensions):
+                relative_path = os.path.relpath(os.path.join(root_dir, file), folder)
+                all_files.add(relative_path)
+    return all_files
+
 # Function to compare files and find differences
 def compare_folders(folder1, folder2):
-    folder1_files = {f for f in os.listdir(folder1) if f.endswith(('.txt', '.py'))}
-    folder2_files = {f for f in os.listdir(folder2) if f.endswith(('.txt', '.py'))}
+    folder1_files = get_files_with_extensions(folder1, ext_list)
+    folder2_files = get_files_with_extensions(folder2, ext_list)
 
     # Common files
     common_files = folder1_files & folder2_files
