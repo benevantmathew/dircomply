@@ -8,7 +8,7 @@ set "python_version=312"
 set "userdir=%userprofile%"
 @REM ############################################
 set build_workspace=..\build
-set "folder=repo_compare"
+set "folder=dircomply"
 @REM ############################################
 if not exist "%build_workspace%" (
     mkdir "%build_workspace%"

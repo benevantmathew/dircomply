@@ -8,7 +8,7 @@ set "python_version=312"
 set "userdir=%userprofile%"
 @REM ############################################################################## Activate local env
 set build_workspace=..\build
-set "folder=repo_compare"
+set "folder=dircomply"
 @REM ############################################
 @REM get version no
 set /p version="Enter version no: "

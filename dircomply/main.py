@@ -2,11 +2,17 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 import sys
-from . import __version__
 
-# extension to compare
-ext_list=('.txt','.py','.bat','.html')
+# Set a default version for standalone execution
+try:
+    from . import __version__  # For PyPI package usage
+except ImportError:
+    __version__ = "1.0.0"  # Fallback version for standalone script/executable
 
+# Extensions to compare
+ext_list = ('.txt', '.py', '.bat', '.html')
+
+# Function to display help
 def print_help():
     help_message = """
 Usage: dircomply [OPTIONS]
@@ -20,6 +26,7 @@ Options:
     """
     print(help_message)
     sys.exit(0)
+
 # Function to read file content
 def read_file(filepath):
     try:
@@ -28,7 +35,7 @@ def read_file(filepath):
     except Exception as e:
         return f"Error: {e}"
 
-# Function to get all files with specific extensions in a folder and its subdirectories
+# Function to get all files with specific extensions
 def get_files_with_extensions(folder, extensions):
     all_files = set()
     for root_dir, _, files in os.walk(folder):
@@ -38,7 +45,7 @@ def get_files_with_extensions(folder, extensions):
                 all_files.add(relative_path)
     return all_files
 
-# Function to compare files and find differences
+# Function to compare folders
 def compare_folders(folder1, folder2):
     folder1_files = get_files_with_extensions(folder1, ext_list)
     folder2_files = get_files_with_extensions(folder2, ext_list)
@@ -62,14 +69,6 @@ def compare_folders(folder1, folder2):
 
 # GUI Application
 def create_gui():
-    # Check for command-line arguments
-    if "--version" in sys.argv or "-v" in sys.argv:
-        print(f"version {__version__}")
-        sys.exit(0)
-    elif "--help" in sys.argv or "-h" in sys.argv:
-        print_help()
-        sys.exit(0)
- 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
         if path:
@@ -137,3 +136,15 @@ def create_gui():
     tk.Button(root, text="Compare Folders", command=compare, font=("Arial", 12, "bold"), bg="lightblue").pack(pady=20)
 
     root.mainloop()
+
+# Main entry point
+if __name__ == "__main__":
+    # Check for command-line arguments
+    if "--version" in sys.argv or "-v" in sys.argv:
+        print(f"version {__version__}")
+        sys.exit(0)
+    elif "--help" in sys.argv or "-h" in sys.argv:
+        print_help()
+        sys.exit(0)
+    else:
+        create_gui()
