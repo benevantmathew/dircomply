@@ -113,6 +113,3 @@ def create_gui():
     tk.Button(root, text="Compare Folders", command=compare, font=("Arial", 12, "bold"), bg="lightblue").pack(pady=20)
 
     root.mainloop()
-
-if __name__ == "__main__":
-    create_gui()
