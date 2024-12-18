@@ -7,6 +7,7 @@ setup(
     long_description=open("readme.md").read(),  # Detailed description
     long_description_content_type="text/markdown",
     author="Benevant Mathew",
+    author_email="benevantmathewv@gmail.com",
     license="MIT",                     # License type
     packages=find_packages(include=["dircomply"]),  # Include only 'dircomply' directory
     install_requires=[],               # Add dependencies here

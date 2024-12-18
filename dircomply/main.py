@@ -5,9 +5,13 @@ import sys
 
 # Set a default version for standalone execution
 try:
-    from . import __version__  # For PyPI package usage
+    # For PyPI package usage
+    from . import __version__  
+    from . import __author__  
 except ImportError:
-    __version__ = "1.0.0"  # Fallback version for standalone script/executable
+    # Fallback version for standalone script/executable
+    __version__ = "0.2"
+    __author__ = "Benevant Mathew"
 
 # Extensions to compare
 ext_list = ('.txt', '.py', '.bat', '.html')
@@ -69,6 +73,17 @@ def compare_folders(folder1, folder2):
 
 # GUI Application
 def create_gui():
+    # Check for command-line arguments
+    if "--version" in sys.argv or "-v" in sys.argv:
+        print(f"version {__version__}")
+        sys.exit(0)
+    elif "--help" in sys.argv or "-h" in sys.argv:
+        print_help()
+        sys.exit(0)
+    elif "--author" in sys.argv or "-a" in sys.argv:
+        print(f"Author {__author__}")
+        sys.exit(0)
+    #######################################################
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
         if path:
