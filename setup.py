@@ -1,8 +1,15 @@
 from setuptools import setup, find_packages
 
+# Dynamically read the version from __init__.py
+def get_version():
+    version = {}
+    with open("dircomply/version.py") as f:
+        exec(f.read(), version)
+    return version["__version__"]
+
 setup(
     name="dircomply",                 # Name of your package
-    version="0.1",                     # Version of your package
+    version=get_version(),                     # Version of your package
     description="A small package to compare the files between two project folders.",  # Short description
     long_description=open("readme.md").read(),  # Detailed description
     long_description_content_type="text/markdown",

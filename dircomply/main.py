@@ -6,11 +6,11 @@ import sys
 # Set a default version for standalone execution
 try:
     # For PyPI package usage
-    from . import __version__  
+    from version import __version__  
     from . import __author__  
 except ImportError:
     # Fallback version for standalone script/executable
-    __version__ = "0.2"
+    __version__ = "0.2.0"
     __author__ = "Benevant Mathew"
 
 # Extensions to compare
@@ -68,8 +68,9 @@ def compare_folders(folder1, folder2):
         path2 = os.path.join(folder2, file)
         if read_file(path1) != read_file(path2):
             different_files.append(file)
-
-    return different_files, unique_to_folder1, unique_to_folder2
+    # sorting
+    different_files.sort()
+    return different_files, sorted(unique_to_folder1), sorted(unique_to_folder2)
 
 # GUI Application
 def create_gui():
