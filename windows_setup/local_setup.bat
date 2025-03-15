@@ -20,10 +20,22 @@ if exist "%userdir%\AppData\Local\Programs\Python\Python%python_version%\python.
     )
 )
 @REM ##############################################################################
-cd ..
+@REM get script file dir
+set script_dir=%~dp0
+@REM Remove trailing backslash
+if "%script_dir:~-1%"=="\" set script_dir=%script_dir:~0,-1%
+@REM set root dir
+set rootdir=%script_dir%/..
+@REM cd to root dir
+cd %rootdir%
+@REM get dir name
 set "folder=%cd%"
 for %%A in ("%folder%") do set "folder=%%~nxA"
 set "name=%folder%-py%python_version%-env"
+@REM create envs folder is not exist
+if not exist "%userdir%\envs" (
+    mkdir "%userdir%\envs"
+) 
 @REM create required directories
 if not exist "%userdir%\envs" (
     mkdir "%userdir%\envs"
