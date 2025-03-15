@@ -2,3 +2,5 @@ Version 0.1
     Date: 18-12-2024
     1.The app will compare two folders and show the difference in .txt, .py, .bat, .html files in both repo.
     2.Along with app will display unique files for each repo.
+Version 0.2.0
+    Date:
