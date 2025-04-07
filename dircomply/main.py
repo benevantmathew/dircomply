@@ -8,8 +8,6 @@ from dircomply.version import __email__
 
 # Extensions to compare
 ext_list = ('.txt', '.py', '.bat', '.html')
-# varaible
-size_col="Size (MB)"
 
 # Function to display help
 def print_help():
@@ -21,7 +19,10 @@ A small package to compare the files between two project folders.
 Options:
 	--version, -v      Show the version of dircomply and exit
 	--help, -h         Show this help message and exit
+	--email, -e        Show email and exit
+	--author, -a       Show author and exit
 	(No arguments)     Launch the GUI application
+	[folder1_path] [folder2_path] compare contents form both folders.
 	"""
 	print(help_message)
 	sys.exit(0)
@@ -29,10 +30,17 @@ Options:
 # Function to read file content
 def read_file(filepath):
 	try:
-		with open(filepath, 'r') as file:
+		with open(filepath, 'r', encoding='utf-8') as file:
 			return file.read()
+	except UnicodeDecodeError:
+		try:
+			with open(filepath, 'r', encoding='latin-1') as file:
+				return file.read()
+		except Exception as e:
+			return f"Error: {e}"
 	except Exception as e:
 		return f"Error: {e}"
+
 
 # Function to get all files with specific extensions
 def get_files_with_extensions(folder, extensions):
@@ -63,12 +71,11 @@ def compare_folders(folder1, folder2):
 		path2 = os.path.join(folder2, file)
 		if read_file(path1) != read_file(path2):
 			different_files.append(file)
-	# sorting
-	different_files.sort()
-	return different_files, sorted(unique_to_folder1), sorted(unique_to_folder2)
+	return sorted(different_files), sorted(unique_to_folder1), sorted(unique_to_folder2)
 
 # GUI Application
-def create_gui():
+def create_gui(folder1_path=None,folder2_path=None,compare_on_start=False):
+	
 	def select_folder1():
 		path = filedialog.askdirectory(title="Select Folder 1")
 		if path:
@@ -115,6 +122,10 @@ def create_gui():
 		result_text.pack(expand=True, fill=tk.BOTH)
 		result_text.insert(tk.END, result)
 		result_text.config(state=tk.DISABLED)
+		scrollbar = tk.Scrollbar(popup, command=result_text.yview)
+		scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+		result_text.config(yscrollcommand=scrollbar.set)
+
 
 	# Main window
 	root = tk.Tk()
@@ -123,6 +134,10 @@ def create_gui():
 
 	folder1_var = tk.StringVar()
 	folder2_var = tk.StringVar()
+	if folder1_path:
+		folder1_var.set(folder1_path)
+	if folder2_path:
+		folder2_var.set(folder2_path)
 
 	# GUI Layout
 	tk.Label(root, text="Folder 1 Path:", font=("Arial", 12)).pack(pady=5)
@@ -134,12 +149,13 @@ def create_gui():
 	tk.Button(root, text="Select Folder 2", command=select_folder2).pack(pady=5)
 
 	tk.Button(root, text="Compare Folders", command=compare, font=("Arial", 12, "bold"), bg="lightblue").pack(pady=20)
+	if compare_on_start and folder1_path and folder2_path:
+			compare()
 
 	root.mainloop()
 
 # Main entry point
 def main():
-	sort_by = size_col
 	# Check for command-line arguments
 	if "--version" in sys.argv or "-v" in sys.argv:
 		print(f"version {__version__}")
@@ -153,21 +169,22 @@ def main():
 	if "--email" in sys.argv or "-e" in sys.argv:
 		print(f"Mailto {__email__}")
 		sys.exit(0)
-	if "--sort" in sys.argv:
-		try:
-			sort_by = sys.argv[sys.argv.index("--sort") + 1]
-		except IndexError:
-			print("Error: Please provide a column name for sorting.")
+	if len(sys.argv) == 2:
+		print("Error: Please provide both folder paths.")
+		sys.exit(1)
+	if len(sys.argv) > 2:
+		folder1_path = sys.argv[1]
+		folder2_path = sys.argv[2]
+		if not os.path.exists(folder1_path):
+			print(f"Error: Directory '{folder1_path}' does not exist.")
 			sys.exit(1)
-	if len(sys.argv) > 1 and sys.argv[-1] not in ["--sort", sort_by]:
-		directory = sys.argv[-1]
-		if os.path.exists(directory):
-			create_gui(initial_folder=directory,sort_col=sort_by)
-		else:
-			print(f"Error: Directory '{directory}' does not exist.")
+		if not os.path.exists(folder2_path):
+			print(f"Error: Directory '{folder2_path}' does not exist.")
 			sys.exit(1)
+		create_gui(folder1_path=folder1_path,folder2_path=folder2_path,compare_on_start=True)
 	else:
 		create_gui()
+
 
 if __name__ == "__main__":
 	main()
