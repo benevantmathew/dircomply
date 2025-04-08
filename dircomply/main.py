@@ -2,9 +2,9 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 import sys
-from dircomply.version import __version__
-from dircomply.version import __author__
-from dircomply.version import __email__
+from dircomply.version import (
+	__version__,__email__,__release_date__,__author__
+)
 
 # Extensions to compare
 ext_list = ('.txt', '.py', '.bat', '.html')
@@ -109,9 +109,9 @@ def create_gui(folder1_path=None,folder2_path=None,compare_on_start=False):
 			result += "No files with differences found.\n\n"
 
 		if unique_to_folder1:
-			result += "Files unique to Folder 1:\n" + "\n".join(unique_to_folder1) + "\n\n"
+			result += f"Files unique to {folder1}:\n" + "\n".join(unique_to_folder1) + "\n\n"
 		if unique_to_folder2:
-			result += "Files unique to Folder 2:\n" + "\n".join(unique_to_folder2) + "\n\n"
+			result += f"Files unique to {folder2}:\n" + "\n".join(unique_to_folder2) + "\n\n"
 		
 		# Display results in a popup window
 		popup = tk.Toplevel(root)
@@ -150,7 +150,7 @@ def create_gui(folder1_path=None,folder2_path=None,compare_on_start=False):
 
 	tk.Button(root, text="Compare Folders", command=compare, font=("Arial", 12, "bold"), bg="lightblue").pack(pady=20)
 	if compare_on_start and folder1_path and folder2_path:
-			compare()
+		compare()
 
 	root.mainloop()
 
@@ -168,6 +168,9 @@ def main():
 		sys.exit(0)
 	if "--email" in sys.argv or "-e" in sys.argv:
 		print(f"Mailto {__email__}")
+		sys.exit(0)
+	if "--date" in sys.argv or "-d" in sys.argv:
+		print(f"Release Date {__release_date__}")
 		sys.exit(0)
 	if len(sys.argv) == 2:
 		print("Error: Please provide both folder paths.")

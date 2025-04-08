@@ -1,5 +1,7 @@
 # Changelog
-## Version 0.2.0 - 07-04-2024
+## Version 0.3.0 - 08-04-2025
+- Show Folder Paths dynamically in report.
+## Version 0.2.0 - 07-04-2025
 - Added sort feature in all output files list. (Path)
 - Updated readme and changelog.
 - Added compare on cli mode.
