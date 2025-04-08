@@ -1,2 +1,0 @@
-working on v0.2.0
-    need to list features to add.
