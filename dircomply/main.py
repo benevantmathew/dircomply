@@ -102,7 +102,7 @@ def create_gui(folder1_path=None,folder2_path=None,compare_on_start=False):
 		different_files, unique_to_folder1, unique_to_folder2 = compare_folders(folder1, folder2)
 
 		# Create result message
-		result = """Comparison Results:\n\n"""
+		result = f"Comparison Results: of {folder1} and {folder2}\n\n"
 		if different_files:
 			result += "Files with differences:\n" + "\n".join(different_files) + "\n\n"
 		else:
