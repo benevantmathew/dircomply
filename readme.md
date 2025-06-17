@@ -48,5 +48,8 @@ dircomply compares only files with the following extensions:
 .py
 .bat
 .html
+.ts
+.json
+.scss
 
 All other file types are ignored during the comparison.

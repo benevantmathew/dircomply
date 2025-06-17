@@ -22,6 +22,10 @@ setup(
     author_email="benevantmathewv@gmail.com",
     license="MIT",                     # License type
     packages=find_packages(include=["dircomply"]),  # Include only 'dircomply' directory
+    package_data={
+        "dircomply": ["config/extensions.json"],  # Include the JSON file
+    },
+    include_package_data=True,
     install_requires=[],               # Add dependencies here
     entry_points={
         "console_scripts": [

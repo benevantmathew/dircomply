@@ -2,12 +2,26 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 import sys
+import json
+import importlib.resources
 from dircomply.version import (
 	__version__,__email__,__release_date__,__author__
 )
 
 # Extensions to compare
-ext_list = ('.txt', '.py', '.bat', '.html')
+def load_extensions():
+    try:
+        # Try reading from installed package
+        with importlib.resources.open_text("dircomply.config", "extensions.json") as f:
+            data = json.load(f)
+    except (FileNotFoundError, ImportError):
+        # Fallback to local file system (e.g., during development or direct run)
+        local_path = os.path.join(os.path.dirname(__file__), "config", "extensions.json")
+        with open(local_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    return tuple(data.get("extensions", [".txt", ".py", ".bat", ".html", ".ts"]))
+ext_list = load_extensions()
+
 
 # Function to display help
 def print_help():
@@ -34,10 +48,15 @@ def read_file(filepath):
 			return file.read()
 	except UnicodeDecodeError:
 		try:
-			with open(filepath, 'r', encoding='latin-1') as file:
+			# Handles utf-8 with BOM
+			with open(filepath, 'r', encoding='utf-8-sig') as file:
 				return file.read()
-		except Exception as e:
-			return f"Error: {e}"
+		except UnicodeDecodeError:
+			try:
+				with open(filepath, 'r', encoding='latin-1') as file:
+					return file.read()
+			except Exception as e:
+				return f"Error: {e}"
 	except Exception as e:
 		return f"Error: {e}"
 
