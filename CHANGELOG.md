@@ -1,6 +1,8 @@
 # Changelog
+## Version 0.6.0 - 19-06-2025
+- Added file support on .md,.tcl.
 ## Version 0.5.0 - 17-06-2025
-- Added file support on .json,.ts,.scss for angular dev
+- Added file support on .json,.ts,.scss for angular dev.
 ## Version 0.4.0 - 08-04-2025
 - Report shows both foler paths in top for quick reference.
 ## Version 0.3.0 - 08-04-2025

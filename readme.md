@@ -6,7 +6,7 @@
 - Detect differences in file contents
 - List unique files in each folder
 - Supports the following file types:
-    .txt, .py, .bat, .html
+    .txt, .py, .bat, .html,.ts,.json,.scss,.tcl,.md
 - GUI mode for interactive comparison
 - CLI mode for quick terminal use
 
@@ -51,5 +51,7 @@ dircomply compares only files with the following extensions:
 .ts
 .json
 .scss
+.tcl
+.md
 
 All other file types are ignored during the comparison.
