@@ -22,15 +22,13 @@ set "name=%folder%-py%python_version%-env"
 @REM ##############################################################################
 @REM check if env already exist
 if exist "%userprofile%\envs\%name%" (
-	echo Enabling venv
+	echo Deleting environment....
 ) else (
 	echo No venv. Run local_setup first.
 	pause
 	exit /b 1
 )
 @REM ##############################################################################
-@REM Set paths
-set "venv_path=%userprofile%\envs\%name%\Scripts\activate.bat"
-@REM ##############################################################################
-@REM Start new command window with Python venv and Git in PATH
-start cmd.exe /k "set PATH=%git_path%;%PATH%;%win32_path% & call %venv_path%"
+rd /s %userprofile%\envs\%name%
+echo environment deleted
+pause
