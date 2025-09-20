@@ -52,5 +52,7 @@ dircomply compares only files with the following extensions:
 - scss
 - tcl
 - md
+- yaml
+- yml
 
 All other file types are ignored during the comparison.

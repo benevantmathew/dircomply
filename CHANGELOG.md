@@ -1,4 +1,6 @@
 # Changelog
+## Version 0.7.0 - 20-09-2025
+- Added file support on .yaml,.yml.
 ## Version 0.6.0 - 19-06-2025
 - Added file support on .md,.tcl.
 ## Version 0.5.0 - 17-06-2025
