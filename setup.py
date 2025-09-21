@@ -21,7 +21,7 @@ setup(
     author="Benevant Mathew",
     author_email="benevantmathewv@gmail.com",
     license="MIT",                     # License type
-    packages=find_packages(include=["dircomply"]),  # Include only 'dircomply' directory
+    packages=find_packages(include=["dircomply","dircomply.*"]),  # Include 'dircomply' directory and its submodule config
     package_data={
         "dircomply": ["config/extensions.json"],  # Include the JSON file
     },
@@ -31,14 +31,14 @@ setup(
         "console_scripts": [
             "dircomply = dircomply.main:main",  # entry point
         ],
-    },    
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Utilities",        
+        "Topic :: Utilities",
     ],
     python_requires=">=3.7",           # Specify minimum Python version
 )
