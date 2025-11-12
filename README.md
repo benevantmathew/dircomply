@@ -57,27 +57,16 @@ If no arguments are passed, GUI mode will be launched.
 ## 🔎 What Gets Compared?
 
 dircomply compares only files with the following extensions:
-
-- txt
-- py
-- bat
-- html
-- ts
-- json
-- scss
-- tcl
-- md
-- yaml
-- yml
+```
+        ".txt", ".py", ".bat", ".html", ".ts",".json",".scss",".tcl",".md",
+        ".yaml",".yml",".ini",".in",".sh",".gitignore"
+```
 
 Also check below files on existence check rather than the content difference check.
-
-- .xlsx
-- .csv
-- .docx
-- .png
-- .jpeg
-- .jpg
-- .ods
+```
+        ".xlsx", ".csv", ".docx",
+        ".png",".jpeg",".jpg",".ods",
+        ".pdf"
+```
 
 All other file types are ignored during the comparison.
