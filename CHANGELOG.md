@@ -1,4 +1,9 @@
 # Changelog
+## Version 1.0.0 - 15-11-2025
+
+- Added LICENSE and MANIFEST.in
+- Create first AUR Release
+
 ## Version 0.9.0 - 12-11-2025
 
 - Added existence check these extensions- ".pdf",
