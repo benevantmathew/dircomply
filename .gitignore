@@ -30,5 +30,4 @@ PKGBUILD
 # Benevant's Scripts
 setup
 pypi_setup
-windows_setup
-
+.vscode
