@@ -23,7 +23,7 @@ setup(
     license="MIT",                     # License type
     packages=find_packages(include=["dircomply","dircomply.*"]),  # Include 'dircomply' directory and its submodule config
     package_data={
-        "dircomply": ["config/extensions.json"],  # Include the JSON file
+        "dircomply": ["application/extensions.json"],  # Include the JSON file
     },
     include_package_data=True,
     entry_points={
@@ -41,4 +41,3 @@ setup(
     ],
     python_requires=">=3.7",           # Specify minimum Python version
 )
-

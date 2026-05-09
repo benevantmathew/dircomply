@@ -29,5 +29,5 @@ PKGBUILD
 
 # Benevant's Scripts
 setup
-pypi_setup
+pypi
 .vscode
