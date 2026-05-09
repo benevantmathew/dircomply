@@ -17,14 +17,14 @@ def compare_folders(folder1, folder2):
     """
     # load extensions(for each query)
     ext_json_filepath = paths.get_extension_filepath()
-    content_exts, existence_exts = load_extensions(ext_json_filepath)
+    content_exts, existence_exts, skip_dirs = load_extensions(ext_json_filepath)
 
     # Separate by category
-    folder1_content = get_files_with_extensions(folder1, content_exts)
-    folder2_content = get_files_with_extensions(folder2, content_exts)
+    folder1_content = get_files_with_extensions(folder1, content_exts, skip_dirs)
+    folder2_content = get_files_with_extensions(folder2, content_exts, skip_dirs)
 
-    folder1_exist = get_files_with_extensions(folder1, existence_exts)
-    folder2_exist = get_files_with_extensions(folder2, existence_exts)
+    folder1_exist = get_files_with_extensions(folder1, existence_exts, skip_dirs)
+    folder2_exist = get_files_with_extensions(folder2, existence_exts, skip_dirs)
 
     # Combine sets
     folder1_files = folder1_content | folder1_exist
