@@ -6,6 +6,6 @@
     "existence_extensions": [
         ".xlsx", ".csv", ".docx",
         ".png",".jpeg",".jpg",".ods",
-        ".pdf"
+        ".pdf",".ico"
     ]
 }
