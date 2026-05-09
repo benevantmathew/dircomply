@@ -10,7 +10,11 @@ from tkinter import filedialog, messagebox
 
 from dircomply.compare import compare_folders
 
-def create_gui(folder1_path=None,folder2_path=None,compare_on_start=False):
+def create_gui(
+        folder1_path=None,
+        folder2_path=None,
+        compare_on_start=False
+    ):
     """
     create_gui
     # GUI Application

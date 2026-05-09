@@ -40,6 +40,3 @@ def load_extensions():
         tuple(data.get("content_extensions", [".txt", ".py", ".bat", ".html", ".ts"])),
         tuple(data.get("existence_extensions", [".xlsx", ".csv", ".docx"]))
     )
-
-
-
