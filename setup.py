@@ -1,3 +1,9 @@
+"""
+setup.py
+
+Author: Benevant Mathew
+Date: 2025-09-20
+"""
 from setuptools import setup, find_packages
 
 # Dynamically read the version from __init__.py
