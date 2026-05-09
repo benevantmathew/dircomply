@@ -1,6 +1,0 @@
-setuptools
-wheel
-twine
-
-# format 
-ruff
