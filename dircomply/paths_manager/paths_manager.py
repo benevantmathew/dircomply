@@ -19,12 +19,12 @@ class PathsManager:
         self.userprofile = userprofile
 
         # XDG standard
-        self.config_folder = os.path.join(self.userprofile, ".config")
-        self.app_folder = os.path.join(self.config_folder, __app_name__)
+        self.xdg_config_folder = os.path.join(self.userprofile, ".config")
+        self.app_folder = os.path.join(self.xdg_config_folder, __app_name__)
 
         # Ensure directories exist
         for d in [
-            self.config_folder,
+            self.xdg_config_folder,
             self.app_folder,
         ]:
             os.makedirs(d, exist_ok=True)
@@ -34,3 +34,9 @@ class PathsManager:
         get extension filepath
         """
         return os.path.join(self.app_folder,"extensions.json")
+
+    def get_sample_extension_filepath(self):
+        """
+        used to get the factory extension.json filepath
+        """
+        return os.path.join(self.root_dir,"application","extensions.json")

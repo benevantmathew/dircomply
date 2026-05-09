@@ -8,7 +8,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-from dircomply.compare import compare_folders
+from dircomply.core.compare import compare_folders
+from dircomply.version import __app_label__
 
 def create_gui(
         folder1_path=None,
@@ -73,7 +74,7 @@ def create_gui(
 
     # Main window
     root = tk.Tk()
-    root.title("Folder File Comparator")
+    root.title(__app_label__)
     root.geometry("500x300")
 
     folder1_var = tk.StringVar()

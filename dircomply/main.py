@@ -10,8 +10,7 @@ import sys
 from dircomply.version import (
     __version__,__email__,__release_date__,__author__
 )
-from dircomply.help import print_help
-from dircomply.gui import create_gui
+from dircomply.core.help import print_help
 
 # Main entry point
 def main():
@@ -53,6 +52,13 @@ def main():
             print(f"Error: Directory '{folder2_path}' does not exist.")
             sys.exit(1)
 
+    # Add startup
+    from dircomply.core.startup import Startup
+    startup_obj = Startup()
+    startup_obj.start()
+
+    # call gui
+    from dircomply.gui.gui import create_gui
     create_gui(
         folder1_path=folder1_path,
         folder2_path=folder2_path,

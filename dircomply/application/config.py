@@ -8,7 +8,6 @@ import os
 
 from dircomply.basic_functions.os_funs import get_user_profile
 from dircomply.paths_manager.paths_manager import PathsManager
-from dircomply.utils import load_extensions
 
 # main directories
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__)) # directory where config file exist
@@ -24,9 +23,6 @@ def get_paths():
 
 # definining PathsManager object
 paths = get_paths()
-
-# load extensions
-content_exts, existence_exts = load_extensions()
 
 class Config:
     """

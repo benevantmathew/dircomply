@@ -6,15 +6,19 @@ Date: 2025-09-21
 """
 import os
 
-from dircomply.config.config import content_exts, existence_exts
-from dircomply.utils import get_files_with_extensions
-from dircomply.read import read_file
+from dircomply.application.config import paths
+from dircomply.basic_functions.utils import get_files_with_extensions, load_extensions
+from dircomply.basic_functions.read import read_file
 
 def compare_folders(folder1, folder2):
     """
     compare_folders
     Function to compare folders
     """
+    # load extensions(for each query)
+    ext_json_filepath = paths.get_extension_filepath()
+    content_exts, existence_exts = load_extensions(ext_json_filepath)
+
     # Separate by category
     folder1_content = get_files_with_extensions(folder1, content_exts)
     folder2_content = get_files_with_extensions(folder2, content_exts)
