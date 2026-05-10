@@ -16,7 +16,7 @@ cd "$rootdir"
 echo "Cleaning build directories..."
 
 # Run the clean.py script to remove old build artifacts
-python pypi_setup/clean.py
+python pypi/clean.py
 
 echo "Building distribution packages..."
 python setup.py sdist bdist_wheel

@@ -14,7 +14,7 @@ rootdir="$script_dir/.."
 cd "$rootdir"
 
 # Run the clean.py script to remove old build artifacts
-python pypi_setup/clean.py
+python pypi/clean.py
 
 # build
 echo "Building distribution packages..."
