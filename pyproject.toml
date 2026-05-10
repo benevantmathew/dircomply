@@ -7,7 +7,7 @@ name = "dircomply"
 dynamic = ["version"]
 description = "Compare the files between two project folders."
 readme = { file = "README.md", content-type = "text/markdown" }
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 
 authors = [
