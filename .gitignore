@@ -27,7 +27,5 @@ __pycache__/
 PKGBUILD
 *.SRCINFO
 
-# Benevant's Scripts
-setup
-pypi_setup
+# vscode
 .vscode

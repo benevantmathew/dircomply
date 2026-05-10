@@ -6,6 +6,9 @@
     "existence_extensions": [
         ".xlsx", ".csv", ".docx",
         ".png",".jpeg",".jpg",".ods",
-        ".pdf"
+        ".pdf",".ico"
+    ],
+    "skip_dirs":[
+        ".git", ".venv", "nodemodules", ".vscode", "__pycache__", "build"
     ]
 }
