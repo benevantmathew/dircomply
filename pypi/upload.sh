@@ -18,7 +18,7 @@ python pypi/clean.py
 
 # build
 echo "Building distribution packages..."
-python setup.py sdist bdist_wheel
+python -m build
 
 # upload to pypi
 echo "Uploading to PyPI..."

@@ -19,7 +19,7 @@ echo "Cleaning build directories..."
 python pypi/clean.py
 
 echo "Building distribution packages..."
-python setup.py sdist bdist_wheel
+python -m build
 
 # Find the latest .whl file in dist folder (sorted by time, newest first)
 latest_whl=$(ls -t dist/*.whl | head -n 1)
