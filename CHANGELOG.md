@@ -1,6 +1,10 @@
 # Changelog
 ## Version 1.1.0 - 2026-05-09
 
+- Runtime issue resolved from 1.1.0
+
+## Version 1.1.0 - 2026-05-09
+
 - Added LICENSE and MANIFEST.in
 - Create first AUR Release
 
