@@ -13,6 +13,7 @@ src/
 venv/
 env/
 .venv/
+uv.lock
 
 # Cache
 __pycache__/
