@@ -36,6 +36,7 @@ GUI size options:
     --font_size VALUE               Override GUI label/input/button font size
     --result_font_size VALUE        Override result popup text size
     --zoom, --tk_scaling VALUE      Override Tk scaling, for example 1.35
+    --theme {dark,light}            Override GUI theme for this run
 
 VALUE can be comma-separated or the flag can be repeated.
 Examples:

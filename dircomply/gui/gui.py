@@ -30,6 +30,15 @@ def create_gui(
     normal_font = (font_family, ui_settings["font_size"])
     button_font = (font_family, ui_settings["font_size"], "bold")
     result_font = (font_family, ui_settings["result_font_size"])
+    background_color = ui_settings["background_color"]
+    foreground_color = ui_settings["foreground_color"]
+    input_background_color = ui_settings["input_background_color"]
+    input_foreground_color = ui_settings["input_foreground_color"]
+    button_background_color = ui_settings["button_background_color"]
+    button_foreground_color = ui_settings["button_foreground_color"]
+    accent_color = ui_settings["accent_color"]
+    result_background_color = ui_settings["result_background_color"]
+    result_foreground_color = ui_settings["result_foreground_color"]
 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
@@ -76,12 +85,30 @@ def create_gui(
         popup = tk.Toplevel(root)
         popup.title("Comparison Results")
         popup.geometry(f"{ui_settings['popup_width']}x{ui_settings['popup_height']}")
+        popup.configure(bg=background_color)
 
-        result_text = tk.Text(popup, wrap=tk.WORD, font=result_font)
+        result_text = tk.Text(
+            popup,
+            wrap=tk.WORD,
+            font=result_font,
+            bg=result_background_color,
+            fg=result_foreground_color,
+            insertbackground=result_foreground_color,
+            selectbackground=accent_color,
+            selectforeground=result_foreground_color,
+            borderwidth=0,
+            highlightthickness=0
+        )
         result_text.pack(expand=True, fill=tk.BOTH)
         result_text.insert(tk.END, result)
         result_text.config(state=tk.DISABLED)
-        scrollbar = tk.Scrollbar(popup, command=result_text.yview)
+        scrollbar = tk.Scrollbar(
+            popup,
+            command=result_text.yview,
+            bg=ui_settings["scrollbar_background_color"],
+            troughcolor=background_color,
+            activebackground=accent_color
+        )
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         result_text.config(yscrollcommand=scrollbar.set)
 
@@ -91,6 +118,7 @@ def create_gui(
     root.tk.call("tk", "scaling", ui_settings["tk_scaling"])
     root.title(__app_label__)
     root.geometry(f"{ui_settings['window_width']}x{ui_settings['window_height']}")
+    root.configure(bg=background_color)
 
     folder1_var = tk.StringVar()
     folder2_var = tk.StringVar()
@@ -100,15 +128,40 @@ def create_gui(
         folder2_var.set(folder2_path)
 
     # GUI Layout
-    tk.Label(root, text="Folder 1 Path:", font=normal_font).pack(pady=5)
-    tk.Entry(root, textvariable=folder1_var, width=50, font=normal_font).pack()
-    tk.Button(root, text="Select Folder 1", command=select_folder1, font=normal_font).pack(pady=5)
+    label_options = {"font": normal_font, "bg": background_color, "fg": foreground_color}
+    entry_options = {
+        "width": 50,
+        "font": normal_font,
+        "bg": input_background_color,
+        "fg": input_foreground_color,
+        "insertbackground": input_foreground_color,
+        "selectbackground": accent_color,
+        "selectforeground": input_foreground_color,
+        "relief": tk.FLAT
+    }
+    button_options = {
+        "font": normal_font,
+        "bg": button_background_color,
+        "fg": button_foreground_color,
+        "activebackground": accent_color,
+        "activeforeground": button_foreground_color,
+        "relief": tk.FLAT,
+        "borderwidth": 0,
+        "padx": 8,
+        "pady": 4
+    }
 
-    tk.Label(root, text="Folder 2 Path:", font=normal_font).pack(pady=5)
-    tk.Entry(root, textvariable=folder2_var, width=50, font=normal_font).pack()
-    tk.Button(root, text="Select Folder 2", command=select_folder2, font=normal_font).pack(pady=5)
+    tk.Label(root, text="Folder 1 Path:", **label_options).pack(pady=5)
+    tk.Entry(root, textvariable=folder1_var, **entry_options).pack()
+    tk.Button(root, text="Select Folder 1", command=select_folder1, **button_options).pack(pady=5)
 
-    tk.Button(root, text="Compare Folders", command=compare, font=button_font, bg="lightblue").pack(pady=20)
+    tk.Label(root, text="Folder 2 Path:", **label_options).pack(pady=5)
+    tk.Entry(root, textvariable=folder2_var, **entry_options).pack()
+    tk.Button(root, text="Select Folder 2", command=select_folder2, **button_options).pack(pady=5)
+
+    compare_button_options = button_options.copy()
+    compare_button_options.update({"font": button_font, "bg": accent_color})
+    tk.Button(root, text="Compare Folders", command=compare, **compare_button_options).pack(pady=20)
     if compare_on_start and folder1_path and folder2_path:
         compare()
 

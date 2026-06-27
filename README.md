@@ -53,6 +53,12 @@ Launch GUI mode with temporary larger text/zoom:
 dircomply --font_size 16 --result_font_size 16 --zoom 1.5
 ```
 
+Launch GUI mode with light theme for one run:
+
+```sh
+dircomply --theme light
+```
+
 Show version info:
 
 ```sh
@@ -81,6 +87,7 @@ Option Description
 --font_size VALUE Override GUI label/input/button font size
 --result_font_size VALUE Override result popup text size
 --zoom VALUE Override Tk scaling for high-DPI monitors
+--theme {dark,light} Override GUI theme for this run
 
 `VALUE` can be comma-separated or the flag can be repeated.
 `--existance_ext` and `--append_existance_ext` are also accepted as aliases.
@@ -106,12 +113,13 @@ Example for a 2K/high-DPI monitor:
         "window_width": 750,
         "window_height": 430,
         "popup_width": 950,
-        "popup_height": 700
+        "popup_height": 700,
+        "theme": "dark"
     }
 }
 ```
 
-`tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size.
+`tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size. `theme` supports `dark` and `light`; dark is the default.
 
 ## 🔎 What Gets Compared?
 

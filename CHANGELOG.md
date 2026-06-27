@@ -1,4 +1,10 @@
 # Changelog
+## Version 1.2.2 - 2026-06-27
+
+- Added dark/light GUI theme support with dark as the default.
+- Added `theme` to `settings.json` and `--theme {dark,light}` CLI override.
+- Styled main window, result popup, inputs, buttons, and scrollbars from theme colors.
+
 ## Version 1.2.1 - 2026-06-27
 
 - Added GUI settings file support at `~/.config/dircomply/settings.json`.

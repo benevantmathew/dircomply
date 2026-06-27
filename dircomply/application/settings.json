@@ -7,6 +7,7 @@
         "window_width": 650,
         "window_height": 360,
         "popup_width": 850,
-        "popup_height": 600
+        "popup_height": 600,
+        "theme": "dark"
     }
 }

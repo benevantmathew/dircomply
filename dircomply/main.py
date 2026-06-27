@@ -49,6 +49,7 @@ def _parse_args(argv):
     parser.add_argument("--font_size", type=int)
     parser.add_argument("--result_font_size", type=int)
     parser.add_argument("--zoom", "--tk_scaling", dest="tk_scaling", type=float)
+    parser.add_argument("--theme", choices=["dark", "light"])
     return parser.parse_args(argv)
 
 
@@ -111,6 +112,7 @@ def main():
         "font_size": args.font_size,
         "result_font_size": args.result_font_size,
         "tk_scaling": args.tk_scaling,
+        "theme": args.theme,
     }
 
     # Add startup
