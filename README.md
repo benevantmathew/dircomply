@@ -50,7 +50,7 @@ dircomply
 Launch GUI mode with temporary larger text/zoom:
 
 ```sh
-dircomply --font_size 16 --result_font_size 16 --zoom 1.5
+dircomply --font_size 16 --result_font_size 16 --result_line_spacing 8 --result_text_bold true --zoom 1.5
 ```
 
 Launch GUI mode with light theme for one run:
@@ -86,6 +86,8 @@ Option Description
 --append_skip_dir VALUE Append to JSON skip_dirs
 --font_size VALUE Override GUI label/input/button font size
 --result_font_size VALUE Override result popup text size
+--result_line_spacing VALUE Override result popup line spacing in pixels
+--result_text_bold VALUE Override result popup bold text: true or false
 --zoom VALUE Override Tk scaling for high-DPI monitors
 --theme {dark,light} Override GUI theme for this run
 
@@ -109,6 +111,8 @@ Example for a 2K/high-DPI monitor:
         "font_family": "Arial",
         "font_size": 16,
         "result_font_size": 16,
+        "result_line_spacing": 6,
+        "result_text_bold": true,
         "tk_scaling": 1.5,
         "window_width": 750,
         "window_height": 430,
@@ -119,7 +123,7 @@ Example for a 2K/high-DPI monitor:
 }
 ```
 
-`tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size. `theme` supports `dark` and `light`; dark is the default.
+`tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size. `result_line_spacing` controls extra pixels after each result text line. `result_text_bold` controls whether result popup text is bold. `theme` supports `dark` and `light`; dark is the default.
 
 ## 🔎 What Gets Compared?
 

@@ -34,6 +34,18 @@ def _normalize_extensions(values):
     )
 
 
+def _parse_bool(value):
+    """
+    Parse bool-like command-line values.
+    """
+    normalized_value = str(value).strip().lower()
+    if normalized_value in {"1", "true", "yes", "y", "on"}:
+        return True
+    if normalized_value in {"0", "false", "no", "n", "off"}:
+        return False
+    raise argparse.ArgumentTypeError("Expected true/false, yes/no, on/off, or 1/0")
+
+
 def _parse_args(argv):
     """
     Parse command-line arguments.
@@ -48,6 +60,8 @@ def _parse_args(argv):
     parser.add_argument("--append_skip_dir", action="append", default=[])
     parser.add_argument("--font_size", type=int)
     parser.add_argument("--result_font_size", type=int)
+    parser.add_argument("--result_line_spacing", type=int)
+    parser.add_argument("--result_text_bold", type=_parse_bool)
     parser.add_argument("--zoom", "--tk_scaling", dest="tk_scaling", type=float)
     parser.add_argument("--theme", choices=["dark", "light"])
     return parser.parse_args(argv)
@@ -111,6 +125,8 @@ def main():
     ui_options = {
         "font_size": args.font_size,
         "result_font_size": args.result_font_size,
+        "result_line_spacing": args.result_line_spacing,
+        "result_text_bold": args.result_text_bold,
         "tk_scaling": args.tk_scaling,
         "theme": args.theme,
     }

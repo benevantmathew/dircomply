@@ -3,6 +3,8 @@
         "font_family": "Arial",
         "font_size": 14,
         "result_font_size": 14,
+        "result_line_spacing": 6,
+        "result_text_bold": true,
         "tk_scaling": 1.25,
         "window_width": 650,
         "window_height": 360,

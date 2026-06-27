@@ -1,4 +1,11 @@
 # Changelog
+## Version 1.3.0 - 2026-06-27
+
+- Added configurable result popup line spacing through `result_line_spacing` in settings.
+- Added `--result_line_spacing` CLI override for one-run tuning.
+- Added configurable bold result popup text through `result_text_bold` in settings.
+- Added `--result_text_bold true|false` CLI override for one-run tuning.
+
 ## Version 1.2.2 - 2026-06-27
 
 - Added dark/light GUI theme support with dark as the default.

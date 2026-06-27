@@ -29,7 +29,11 @@ def create_gui(
     font_family = ui_settings["font_family"]
     normal_font = (font_family, ui_settings["font_size"])
     button_font = (font_family, ui_settings["font_size"], "bold")
-    result_font = (font_family, ui_settings["result_font_size"])
+    result_font = (
+        font_family,
+        ui_settings["result_font_size"],
+        "bold"
+    ) if ui_settings["result_text_bold"] else (font_family, ui_settings["result_font_size"])
     background_color = ui_settings["background_color"]
     foreground_color = ui_settings["foreground_color"]
     input_background_color = ui_settings["input_background_color"]
@@ -96,6 +100,7 @@ def create_gui(
             insertbackground=result_foreground_color,
             selectbackground=accent_color,
             selectforeground=result_foreground_color,
+            spacing3=ui_settings["result_line_spacing"],
             borderwidth=0,
             highlightthickness=0
         )

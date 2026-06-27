@@ -10,6 +10,8 @@ DEFAULT_UI_SETTINGS = {
     "font_family": "Arial",
     "font_size": 14,
     "result_font_size": 14,
+    "result_line_spacing": 6,
+    "result_text_bold": True,
     "tk_scaling": 1.25,
     "window_width": 650,
     "window_height": 360,
@@ -78,6 +80,21 @@ def _normalize_theme(value):
     return theme if theme in THEME_COLORS else DEFAULT_UI_SETTINGS["theme"]
 
 
+def _bool_value(value, default_value):
+    """
+    Convert config values to bool with fallback.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        normalized_value = value.strip().lower()
+        if normalized_value in {"1", "true", "yes", "y", "on"}:
+            return True
+        if normalized_value in {"0", "false", "no", "n", "off"}:
+            return False
+    return default_value
+
+
 def load_ui_settings(settings_filepath, overrides=None):
     """
     Load UI settings from settings.json and apply optional CLI overrides.
@@ -119,6 +136,7 @@ def load_ui_settings(settings_filepath, overrides=None):
     for key in [
             "font_size",
             "result_font_size",
+            "result_line_spacing",
             "window_width",
             "window_height",
             "popup_width",
@@ -128,6 +146,10 @@ def load_ui_settings(settings_filepath, overrides=None):
     settings["tk_scaling"] = _positive_float(
         settings.get("tk_scaling"),
         DEFAULT_UI_SETTINGS["tk_scaling"]
+    )
+    settings["result_text_bold"] = _bool_value(
+        settings.get("result_text_bold"),
+        DEFAULT_UI_SETTINGS["result_text_bold"]
     )
 
     for key in COLOR_KEYS:
