@@ -1,4 +1,10 @@
 # Changelog
+## Version 1.2.1 - 2026-06-27
+
+- Added GUI settings file support at `~/.config/dircomply/settings.json`.
+- Added configurable GUI font size, result text size, Tk scaling, and window sizes.
+- Added temporary CLI overrides: `--font_size`, `--result_font_size`, and `--zoom`.
+
 ## Version 1.2.0 - 2026-06-27
 
 - Added CLI overwrite and append flags for content extensions, existence extensions, and skipped directories.

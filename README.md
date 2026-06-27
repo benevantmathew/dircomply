@@ -9,6 +9,7 @@
 - List unique files in each folder
 - Supported filetypes are listed later
 - Override or append compare extensions and skipped directories from CLI
+- Configure GUI font size/zoom for high-DPI monitors
 - GUI mode for interactive comparison
 - CLI mode for quick terminal use
 
@@ -46,6 +47,12 @@ Launch GUI mode:
 dircomply
 ```
 
+Launch GUI mode with temporary larger text/zoom:
+
+```sh
+dircomply --font_size 16 --result_font_size 16 --zoom 1.5
+```
+
 Show version info:
 
 ```sh
@@ -71,10 +78,40 @@ Option Description
 --append_existence_ext VALUE Append to JSON existence_extensions
 --skip_dir VALUE Overwrite JSON skip_dirs
 --append_skip_dir VALUE Append to JSON skip_dirs
+--font_size VALUE Override GUI label/input/button font size
+--result_font_size VALUE Override result popup text size
+--zoom VALUE Override Tk scaling for high-DPI monitors
 
 `VALUE` can be comma-separated or the flag can be repeated.
 `--existance_ext` and `--append_existance_ext` are also accepted as aliases.
 If no arguments are passed, GUI mode will be launched.
+
+## 🔍 GUI Text Size / Zoom
+
+The GUI reads user settings from:
+
+```sh
+~/.config/dircomply/settings.json
+```
+
+Example for a 2K/high-DPI monitor:
+
+```json
+{
+    "ui": {
+        "font_family": "Arial",
+        "font_size": 16,
+        "result_font_size": 16,
+        "tk_scaling": 1.5,
+        "window_width": 750,
+        "window_height": 430,
+        "popup_width": 950,
+        "popup_height": 700
+    }
+}
+```
+
+`tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size.
 
 ## 🔎 What Gets Compared?
 

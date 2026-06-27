@@ -4,7 +4,7 @@ version.py
 Author: Benevant Mathew
 Date: 2026-05-10
 """
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 __author__ = "Benevant Mathew"
 __email__ = "benevantmathewv@gmail.com"
 __release_date__="2026-06-27"

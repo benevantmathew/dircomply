@@ -32,6 +32,11 @@ Compare option overrides:
     --skip_dir VALUE                Overwrite JSON skip_dirs
     --append_skip_dir VALUE         Append to JSON skip_dirs
 
+GUI size options:
+    --font_size VALUE               Override GUI label/input/button font size
+    --result_font_size VALUE        Override result popup text size
+    --zoom, --tk_scaling VALUE      Override Tk scaling, for example 1.35
+
 VALUE can be comma-separated or the flag can be repeated.
 Examples:
     dircomply old new --append_skip_dir dist --append_content_ext .toml,.cfg

@@ -35,7 +35,7 @@ include-package-data = true
 include = ["dircomply", "dircomply.*"]
 
 [tool.setuptools.package-data]
-dircomply = ["application/extensions.json"]
+dircomply = ["application/extensions.json", "application/settings.json"]
 
 [tool.setuptools.dynamic]
 version = { attr = "dircomply.version.__version__" }

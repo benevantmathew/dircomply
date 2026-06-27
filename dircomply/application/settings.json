@@ -1,0 +1,12 @@
+{
+    "ui": {
+        "font_family": "Arial",
+        "font_size": 14,
+        "result_font_size": 14,
+        "tk_scaling": 1.25,
+        "window_width": 650,
+        "window_height": 360,
+        "popup_width": 850,
+        "popup_height": 600
+    }
+}

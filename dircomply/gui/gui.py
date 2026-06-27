@@ -8,6 +8,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
+from dircomply.application.config import paths
+from dircomply.basic_functions.settings import load_ui_settings
 from dircomply.core.compare import compare_folders
 from dircomply.version import __app_label__
 
@@ -15,13 +17,19 @@ def create_gui(
         folder1_path=None,
         folder2_path=None,
         compare_on_start=False,
-        compare_options=None
+        compare_options=None,
+        ui_options=None
     ):
     """
     create_gui
     # GUI Application
     """
     compare_options = compare_options or {}
+    ui_settings = load_ui_settings(paths.get_settings_filepath(), ui_options)
+    font_family = ui_settings["font_family"]
+    normal_font = (font_family, ui_settings["font_size"])
+    button_font = (font_family, ui_settings["font_size"], "bold")
+    result_font = (font_family, ui_settings["result_font_size"])
 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
@@ -67,9 +75,9 @@ def create_gui(
         # Display results in a popup window
         popup = tk.Toplevel(root)
         popup.title("Comparison Results")
-        popup.geometry("600x400")
+        popup.geometry(f"{ui_settings['popup_width']}x{ui_settings['popup_height']}")
 
-        result_text = tk.Text(popup, wrap=tk.WORD, font=("Arial", 10))
+        result_text = tk.Text(popup, wrap=tk.WORD, font=result_font)
         result_text.pack(expand=True, fill=tk.BOTH)
         result_text.insert(tk.END, result)
         result_text.config(state=tk.DISABLED)
@@ -80,8 +88,9 @@ def create_gui(
 
     # Main window
     root = tk.Tk()
+    root.tk.call("tk", "scaling", ui_settings["tk_scaling"])
     root.title(__app_label__)
-    root.geometry("500x300")
+    root.geometry(f"{ui_settings['window_width']}x{ui_settings['window_height']}")
 
     folder1_var = tk.StringVar()
     folder2_var = tk.StringVar()
@@ -91,15 +100,15 @@ def create_gui(
         folder2_var.set(folder2_path)
 
     # GUI Layout
-    tk.Label(root, text="Folder 1 Path:", font=("Arial", 12)).pack(pady=5)
-    tk.Entry(root, textvariable=folder1_var, width=50).pack()
-    tk.Button(root, text="Select Folder 1", command=select_folder1).pack(pady=5)
+    tk.Label(root, text="Folder 1 Path:", font=normal_font).pack(pady=5)
+    tk.Entry(root, textvariable=folder1_var, width=50, font=normal_font).pack()
+    tk.Button(root, text="Select Folder 1", command=select_folder1, font=normal_font).pack(pady=5)
 
-    tk.Label(root, text="Folder 2 Path:", font=("Arial", 12)).pack(pady=5)
-    tk.Entry(root, textvariable=folder2_var, width=50).pack()
-    tk.Button(root, text="Select Folder 2", command=select_folder2).pack(pady=5)
+    tk.Label(root, text="Folder 2 Path:", font=normal_font).pack(pady=5)
+    tk.Entry(root, textvariable=folder2_var, width=50, font=normal_font).pack()
+    tk.Button(root, text="Select Folder 2", command=select_folder2, font=normal_font).pack(pady=5)
 
-    tk.Button(root, text="Compare Folders", command=compare, font=("Arial", 12, "bold"), bg="lightblue").pack(pady=20)
+    tk.Button(root, text="Compare Folders", command=compare, font=button_font, bg="lightblue").pack(pady=20)
     if compare_on_start and folder1_path and folder2_path:
         compare()
 

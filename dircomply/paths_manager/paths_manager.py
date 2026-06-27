@@ -40,3 +40,15 @@ class PathsManager:
         used to get the factory extension.json filepath
         """
         return os.path.join(self.root_dir,"application","extensions.json")
+
+    def get_settings_filepath(self):
+        """
+        get settings filepath
+        """
+        return os.path.join(self.app_folder,"settings.json")
+
+    def get_sample_settings_filepath(self):
+        """
+        used to get the factory settings.json filepath
+        """
+        return os.path.join(self.root_dir,"application","settings.json")

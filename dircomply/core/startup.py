@@ -26,18 +26,33 @@ class Startup:
         """
         Startup steps
         """
-        ext_json_filepath = paths.get_extension_filepath()
-        # check extension json file exist in app directory
-        # if not copy it to app directory
-        if not os.path.exists(ext_json_filepath):
-            resource = (
-                importlib.resources.files("dircomply.application")
-                .joinpath("extensions.json")
-            )
+        self._copy_missing_config(
+            paths.get_extension_filepath(),
+            "dircomply.application",
+            "extensions.json",
+            paths.get_sample_extension_filepath()
+        )
+        self._copy_missing_config(
+            paths.get_settings_filepath(),
+            "dircomply.application",
+            "settings.json",
+            paths.get_sample_settings_filepath()
+        )
 
-            if resource.is_file():
-                with importlib.resources.as_file(resource) as src:
-                    shutil.copy2(src, ext_json_filepath)
-            else:
-                sample_ext_filepath = paths.get_sample_extension_filepath()
-                shutil.copy2(sample_ext_filepath, ext_json_filepath)
+    def _copy_missing_config(self, target_filepath, resource_package, resource_name, fallback_filepath):
+        """
+        Copy a bundled config file to the user config folder if it is missing.
+        """
+        if os.path.exists(target_filepath):
+            return
+
+        resource = (
+            importlib.resources.files(resource_package)
+            .joinpath(resource_name)
+        )
+
+        if resource.is_file():
+            with importlib.resources.as_file(resource) as src:
+                shutil.copy2(src, target_filepath)
+        else:
+            shutil.copy2(fallback_filepath, target_filepath)

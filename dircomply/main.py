@@ -46,6 +46,9 @@ def _parse_args(argv):
     parser.add_argument("--append_existence_ext", "--append_existance_ext", action="append", default=[])
     parser.add_argument("--skip_dir", action="append", default=[])
     parser.add_argument("--append_skip_dir", action="append", default=[])
+    parser.add_argument("--font_size", type=int)
+    parser.add_argument("--result_font_size", type=int)
+    parser.add_argument("--zoom", "--tk_scaling", dest="tk_scaling", type=float)
     return parser.parse_args(argv)
 
 
@@ -104,6 +107,12 @@ def main():
         "append_skip_dirs": _split_values(args.append_skip_dir),
     }
 
+    ui_options = {
+        "font_size": args.font_size,
+        "result_font_size": args.result_font_size,
+        "tk_scaling": args.tk_scaling,
+    }
+
     # Add startup
     from dircomply.core.startup import Startup
     startup_obj = Startup()
@@ -115,7 +124,8 @@ def main():
         folder1_path=folder1_path,
         folder2_path=folder2_path,
         compare_on_start=compare_on_start,
-        compare_options=compare_options
+        compare_options=compare_options,
+        ui_options=ui_options
     )
 
 if __name__ == "__main__":
