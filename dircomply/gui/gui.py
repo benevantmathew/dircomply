@@ -14,12 +14,14 @@ from dircomply.version import __app_label__
 def create_gui(
         folder1_path=None,
         folder2_path=None,
-        compare_on_start=False
+        compare_on_start=False,
+        compare_options=None
     ):
     """
     create_gui
     # GUI Application
     """
+    compare_options = compare_options or {}
 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
@@ -44,7 +46,11 @@ def create_gui(
             return
 
         # Compare folders
-        different_files, unique_to_folder1, unique_to_folder2 = compare_folders(folder1, folder2)
+        different_files, unique_to_folder1, unique_to_folder2 = compare_folders(
+            folder1,
+            folder2,
+            **compare_options
+        )
 
         # Create result message
         result = f"Comparison Results: of {folder1} and {folder2}\n\n"

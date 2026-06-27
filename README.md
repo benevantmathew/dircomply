@@ -8,6 +8,7 @@
 - Detect differences in file contents
 - List unique files in each folder
 - Supported filetypes are listed later
+- Override or append compare extensions and skipped directories from CLI
 - GUI mode for interactive comparison
 - CLI mode for quick terminal use
 
@@ -25,6 +26,18 @@ Compare two folders via CLI:
 
 ```sh
 dircomply /path/to/folder1 /path/to/folder2
+```
+
+Append one skipped directory and one content extension to the JSON defaults:
+
+```sh
+dircomply /path/to/folder1 /path/to/folder2 --append_skip_dir dist --append_content_ext .toml
+```
+
+Overwrite skipped directories and content extensions from the JSON defaults:
+
+```sh
+dircomply /path/to/folder1 /path/to/folder2 --skip_dir .git,build --content_ext .py --content_ext .json
 ```
 
 Launch GUI mode:
@@ -52,6 +65,15 @@ Option Description
 --version, -v Show version number and exit
 --author, -a Show author name and exit
 --email, -e Show author email and exit
+--content_ext VALUE Overwrite JSON content_extensions
+--append_content_ext VALUE Append to JSON content_extensions
+--existence_ext VALUE Overwrite JSON existence_extensions
+--append_existence_ext VALUE Append to JSON existence_extensions
+--skip_dir VALUE Overwrite JSON skip_dirs
+--append_skip_dir VALUE Append to JSON skip_dirs
+
+`VALUE` can be comma-separated or the flag can be repeated.
+`--existance_ext` and `--append_existance_ext` are also accepted as aliases.
 If no arguments are passed, GUI mode will be launched.
 
 ## 🔎 What Gets Compared?
@@ -66,7 +88,12 @@ Also check below files on existence check rather than the content difference che
 ```
         ".xlsx", ".csv", ".docx",
         ".png",".jpeg",".jpg",".ods",
-        ".pdf"
+        ".pdf", ".ico"
+```
+
+The default skipped directories are:
+```
+        ".git", ".venv", "nodemodules", ".vscode", "__pycache__", "build"
 ```
 
 All other file types are ignored during the comparison.
