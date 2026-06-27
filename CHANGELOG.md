@@ -1,4 +1,9 @@
 # Changelog
+## Version 1.2.0 - 2026-06-27
+
+- Added CLI overwrite and append flags for content extensions, existence extensions, and skipped directories.
+- Added comma-separated/repeated flag parsing and existence/existance aliases.
+
 ## Version 1.1.0 - 2026-05-09
 
 - Runtime issue resolved from 1.1.0
