@@ -6,6 +6,7 @@ Date: 2025-09-21
 """
 import os
 import tkinter as tk
+import tkinter.font as tkfont
 from tkinter import filedialog, messagebox
 
 from dircomply.application.config import paths
@@ -40,14 +41,6 @@ def create_gui(
     accent_color = ui_settings["accent_color"]
     result_background_color = ui_settings["result_background_color"]
     result_foreground_color = ui_settings["result_foreground_color"]
-
-    def _result_font(size):
-        """
-        Build the result text font tuple from current UI settings.
-        """
-        if result_font_weight == "bold":
-            return (font_family, size, "bold")
-        return (font_family, size)
 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
@@ -95,11 +88,17 @@ def create_gui(
         popup.title("Dircomply Results")
         popup.geometry(f"{ui_settings['popup_width']}x{ui_settings['popup_height']}")
         popup.configure(bg=background_color)
+        result_font = tkfont.Font(
+            root=popup,
+            family=font_family,
+            size=result_font_size,
+            weight=result_font_weight
+        )
 
         result_text = tk.Text(
             popup,
             wrap=tk.WORD,
-            font=_result_font(result_font_size),
+            font=result_font,
             bg=result_background_color,
             fg=result_foreground_color,
             insertbackground=result_foreground_color,
@@ -123,6 +122,7 @@ def create_gui(
         result_text.config(yscrollcommand=scrollbar.set)
 
         current_result_font_size = {"value": result_font_size}
+        control_mask = 0x0004
 
         def update_result_font(size):
             """
@@ -130,12 +130,14 @@ def create_gui(
             """
             safe_size = max(8, min(72, int(size)))
             current_result_font_size["value"] = safe_size
-            result_text.configure(font=_result_font(safe_size))
+            result_font.configure(size=safe_size)
 
         def zoom_result_font(event):
             """
             Ctrl + mouse wheel dynamically changes result text size.
             """
+            if not getattr(event, "state", 0) & control_mask:
+                return None
             wheel_delta = getattr(event, "delta", 0)
             if wheel_delta:
                 direction = 1 if wheel_delta > 0 else -1
@@ -144,9 +146,22 @@ def create_gui(
             update_result_font(current_result_font_size["value"] + direction)
             return "break"
 
-        result_text.bind("<Control-MouseWheel>", zoom_result_font)
-        result_text.bind("<Control-Button-4>", zoom_result_font)
-        result_text.bind("<Control-Button-5>", zoom_result_font)
+        def zoom_result_font_from_key(direction):
+            """
+            Ctrl + plus/minus fallback for environments that intercept Ctrl-scroll.
+            """
+            def zoom(_event):
+                update_result_font(current_result_font_size["value"] + direction)
+                return "break"
+            return zoom
+
+        for widget in (result_text, popup, scrollbar):
+            widget.bind("<MouseWheel>", zoom_result_font)
+            widget.bind("<Button-4>", zoom_result_font)
+            widget.bind("<Button-5>", zoom_result_font)
+            widget.bind("<Control-plus>", zoom_result_font_from_key(1))
+            widget.bind("<Control-equal>", zoom_result_font_from_key(1))
+            widget.bind("<Control-minus>", zoom_result_font_from_key(-1))
 
 
     # Main window

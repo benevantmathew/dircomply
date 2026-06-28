@@ -126,7 +126,7 @@ Example for a 2K/high-DPI monitor:
 
 `tk_scaling` zooms the whole Tkinter UI. `font_size` and `result_font_size` control the text size. `result_line_spacing` controls extra pixels after each result text line. `result_text_bold` controls whether result popup text is bold. `theme` supports `dark` and `light`; dark is the default.
 
-In the result popup, hold Ctrl and scroll the mouse wheel over the result text to increase or decrease the result font size dynamically. This is temporary for the open result window and does not rewrite `settings.json`.
+In the result popup, hold Ctrl and scroll the mouse wheel over the result text to increase or decrease the result font size dynamically. If your Wayland compositor intercepts Ctrl + mouse wheel, use Ctrl + plus or Ctrl + minus in the result window instead. This is temporary for the open result window and does not rewrite `settings.json`.
 
 ## 🔎 What Gets Compared?
 
