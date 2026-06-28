@@ -5,6 +5,7 @@
 - Added `--result_line_spacing` CLI override for one-run tuning.
 - Added configurable bold result popup text through `result_text_bold` in settings.
 - Added `--result_text_bold true|false` CLI override for one-run tuning.
+- Added Ctrl + mouse wheel dynamic font resizing inside the result popup.
 
 ## Version 1.2.2 - 2026-06-27
 

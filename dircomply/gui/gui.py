@@ -29,11 +29,8 @@ def create_gui(
     font_family = ui_settings["font_family"]
     normal_font = (font_family, ui_settings["font_size"])
     button_font = (font_family, ui_settings["font_size"], "bold")
-    result_font = (
-        font_family,
-        ui_settings["result_font_size"],
-        "bold"
-    ) if ui_settings["result_text_bold"] else (font_family, ui_settings["result_font_size"])
+    result_font_size = ui_settings["result_font_size"]
+    result_font_weight = "bold" if ui_settings["result_text_bold"] else "normal"
     background_color = ui_settings["background_color"]
     foreground_color = ui_settings["foreground_color"]
     input_background_color = ui_settings["input_background_color"]
@@ -43,6 +40,14 @@ def create_gui(
     accent_color = ui_settings["accent_color"]
     result_background_color = ui_settings["result_background_color"]
     result_foreground_color = ui_settings["result_foreground_color"]
+
+    def _result_font(size):
+        """
+        Build the result text font tuple from current UI settings.
+        """
+        if result_font_weight == "bold":
+            return (font_family, size, "bold")
+        return (font_family, size)
 
     def select_folder1():
         path = filedialog.askdirectory(title="Select Folder 1")
@@ -87,14 +92,14 @@ def create_gui(
 
         # Display results in a popup window
         popup = tk.Toplevel(root)
-        popup.title("Comparison Results")
+        popup.title("Dircomply Results")
         popup.geometry(f"{ui_settings['popup_width']}x{ui_settings['popup_height']}")
         popup.configure(bg=background_color)
 
         result_text = tk.Text(
             popup,
             wrap=tk.WORD,
-            font=result_font,
+            font=_result_font(result_font_size),
             bg=result_background_color,
             fg=result_foreground_color,
             insertbackground=result_foreground_color,
@@ -116,6 +121,32 @@ def create_gui(
         )
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         result_text.config(yscrollcommand=scrollbar.set)
+
+        current_result_font_size = {"value": result_font_size}
+
+        def update_result_font(size):
+            """
+            Update result text font size while keeping configured weight.
+            """
+            safe_size = max(8, min(72, int(size)))
+            current_result_font_size["value"] = safe_size
+            result_text.configure(font=_result_font(safe_size))
+
+        def zoom_result_font(event):
+            """
+            Ctrl + mouse wheel dynamically changes result text size.
+            """
+            wheel_delta = getattr(event, "delta", 0)
+            if wheel_delta:
+                direction = 1 if wheel_delta > 0 else -1
+            else:
+                direction = 1 if getattr(event, "num", None) == 4 else -1
+            update_result_font(current_result_font_size["value"] + direction)
+            return "break"
+
+        result_text.bind("<Control-MouseWheel>", zoom_result_font)
+        result_text.bind("<Control-Button-4>", zoom_result_font)
+        result_text.bind("<Control-Button-5>", zoom_result_font)
 
 
     # Main window
