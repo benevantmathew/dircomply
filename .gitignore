@@ -13,7 +13,6 @@ src/
 venv/
 env/
 .venv/
-uv.lock
 
 # Cache
 __pycache__/
@@ -28,5 +27,10 @@ __pycache__/
 PKGBUILD
 *.SRCINFO
 
-# vscode
+# custom locations
+setup
+pypi
 .vscode
+
+# uv workflow
+uv.lock
